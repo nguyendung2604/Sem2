@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/24.0.1"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="org.example.healtech.controller.RegisterController"
+           prefHeight="700" prefWidth="1200"
+           stylesheets="@../css/styles.css">
+
+    <children>
+        <!-- Nền (ảnh hoặc màu gradient, điều chỉnh trong styles.css) -->
+        <AnchorPane fx:id="backgroundPane" />
+
+        <!-- Form đăng ký -->
+        <VBox alignment="CENTER" spacing="15" styleClass="login-box" maxWidth="400">
+            <children>
+                <Label styleClass="app-title" text="HealTech Medisoft"/>
+
+                <VBox alignment="CENTER" spacing="10">
+                    <children>
+                        <Label styleClass="form-title" text="ĐĂNG KÝ"/>
+                        <TextField fx:id="fullnameField" promptText="Họ và tên" styleClass="input-field"/>
+                        <TextField fx:id="usernameField" promptText="Tên đăng nhập" styleClass="input-field"/>
+                        <PasswordField fx:id="passwordField" promptText="Mật khẩu" styleClass="input-field"/>
+                        <PasswordField fx:id="confirmPasswordField" promptText="Nhập lại mật khẩu" styleClass="input-field"/>
+                        <Button onAction="#handleRegister" text="Tạo tài khoản" styleClass="primary-btn"/>
+                        <Hyperlink text="Đã có tài khoản? Đăng nhập" styleClass="link-text" onAction="#handleBackToLogin"/>
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
+    </children>
+</StackPane>

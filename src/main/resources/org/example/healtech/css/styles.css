@@ -1,0 +1,90 @@
+/* Toàn trang */
+.root {
+    -fx-font-family: "Segoe UI", "Arial";
+    /* LỰA CHỌN 1: Dùng nền gradient. Bỏ comment dòng dưới nếu muốn dùng. */
+    /* -fx-background-color: linear-gradient(to bottom right, #E8F1F2, #B0C4DE); */
+
+    /* LỰA CHỌN 2: Dùng ảnh nền. Bỏ comment 3 dòng dưới nếu muốn dùng. */
+    /* Nhớ thay 'background.png' bằng tên file ảnh của bạn */
+    -fx-background-image: url('../images/background.png');
+    -fx-background-size: cover; /* Đảm bảo ảnh nền che phủ toàn bộ cửa sổ */
+    -fx-background-position: center center;
+}
+
+/* Hộp đăng nhập / đăng ký */
+/* Phiên bản đã sửa đổi */
+.login-box {
+    -fx-background-color: rgba(255, 255, 255, 0.9);
+    -fx-padding: 30 60; /* THAY ĐỔI Ở ĐÂY: Giảm padding trên và dưới */
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 30, 0, 0, 10);
+    -fx-max-width: 400;
+}
+
+/* Tiêu đề ứng dụng */
+.app-title {
+    -fx-font-size: 18px;
+    -fx-text-fill: #1E56A0;
+    -fx-font-weight: bold;
+}
+
+/* Tiêu đề form */
+.form-title {
+    -fx-font-size: 20px;
+    -fx-text-fill: #1E56A0;
+    -fx-font-weight: bold;
+}
+
+/* Input */
+.input-field {
+    -fx-pref-width: 300;
+    -fx-padding: 12; /* Tăng padding một chút */
+    -fx-background-color: #F3F4F6;
+    -fx-border-color: #E0E0E0;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-font-size: 14px;
+
+    /* Hiệu ứng chuyển động cho border và background */
+    -fx-transition: -fx-border-color 0.3s ease-in-out, -fx-background-color 0.3s ease-in-out;
+}
+
+.input-field:focused {
+    -fx-border-color: #1E56A0;
+    -fx-background-color: white;
+}
+
+/* Button */
+.primary-btn {
+    -fx-background-color: #1E56A0;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 12 20; /* Tăng padding một chút */
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+
+    /* Hiệu ứng chuyển động cho màu nền */
+    -fx-transition: -fx-background-color 0.3s ease-in-out;
+}
+
+.primary-btn:hover {
+    -fx-background-color: #163E73; /* Màu đậm hơn khi hover */
+}
+
+/* Checkbox + Link */
+.remember-check {
+    -fx-text-fill: #444;
+}
+
+.link-text {
+    -fx-text-fill: #1E56A0;
+    -fx-underline: false; /* Bỏ gạch chân mặc định */
+    -fx-cursor: hand;
+    -fx-transition: -fx-text-fill 0.3s ease-in-out; /* Thêm hiệu ứng đổi màu */
+}
+
+.link-text:hover {
+    -fx-text-fill: #163E73;
+    -fx-underline: true; /* Thêm lại gạch chân khi hover */
+}

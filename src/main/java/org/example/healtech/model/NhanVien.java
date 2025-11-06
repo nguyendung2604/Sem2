@@ -9,6 +9,9 @@ public class NhanVien {
     private String chuyenKhoa;
     private String soDienThoai;
 
+    public NhanVien() {
+    }
+
     public NhanVien(String hoTen, String email, String matKhau) {
         this.hoTen = hoTen;
         this.email = email;

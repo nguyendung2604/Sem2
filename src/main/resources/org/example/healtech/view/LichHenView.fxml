@@ -1,16 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" alignment="CENTER" spacing="10">
-    <Label text="Quản lý Lịch Hẹn" style="-fx-font-size: 24; -fx-font-weight: bold;"/>
-    <TableView prefWidth="800" prefHeight="400">
-        <columns>
-            <TableColumn text="Mã BN"/>
-            <TableColumn text="Họ tên"/>
-            <TableColumn text="Ngày sinh"/>
-            <TableColumn text="Giới tính"/>
-        </columns>
-    </TableView>
-</VBox>
+<AnchorPane xmlns="http://javafx.com/javafx/24.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.healtech.controller.LichHenController">
+
+    <children>
+        <TableView fx:id="tableLichHen" layoutX="20" layoutY="20" prefHeight="250" prefWidth="720">
+            <columns>
+                <TableColumn fx:id="colMaLichHen" text="Mã LH" prefWidth="80"/>
+                <TableColumn fx:id="colMaBenhNhan" text="Mã BN" prefWidth="100"/>
+                <TableColumn fx:id="colMaBacSi" text="Mã BS" prefWidth="100"/>
+                <TableColumn fx:id="colThoiGianHen" text="Thời gian hẹn" prefWidth="150"/>
+                <TableColumn fx:id="colLyDoKham" text="Lý do khám" prefWidth="180"/>
+                <TableColumn fx:id="colTrangThai" text="Trạng thái" prefWidth="110"/>
+            </columns>
+        </TableView>
+
+        <Label layoutX="20" layoutY="290" text="Mã Bệnh Nhân:"/>
+        <TextField fx:id="txtMaBenhNhan" layoutX="130" layoutY="285" prefWidth="100"/>
+
+        <Label layoutX="250" layoutY="290" text="Mã Bác Sĩ:"/>
+        <TextField fx:id="txtMaBacSi" layoutX="320" layoutY="285" prefWidth="100"/>
+
+        <Label layoutX="440" layoutY="290" text="Ngày hẹn:"/>
+        <DatePicker fx:id="dateNgayHen" layoutX="510" layoutY="285" prefWidth="130"/>
+
+        <Label layoutX="660" layoutY="290" text="Giờ:"/>
+        <TextField fx:id="txtGioHen" layoutX="690" layoutY="285" prefWidth="50"/>
+
+        <Label layoutX="20" layoutY="330" text="Lý do khám:"/>
+        <TextField fx:id="txtLyDoKham" layoutX="100" layoutY="325" prefWidth="220"/>
+
+        <Label layoutX="340" layoutY="330" text="Trạng thái:"/>
+        <ComboBox fx:id="cbTrangThai" layoutX="420" layoutY="325" prefWidth="150"/>
+
+
+
+        <Button fx:id="btnThem" text="Thêm" layoutX="590" layoutY="325" onAction="#handleThem"/>
+        <Button fx:id="btnCapNhat" text="Cập nhật" layoutX="650" layoutY="325" onAction="#handleCapNhat"/>
+        <Button fx:id="btnXoa" text="Xóa" layoutX="740" layoutY="325" onAction="#handleXoa"/>
+        <Button fx:id="btnTaiLai" text="Tải lại" layoutX="800" layoutY="325" onAction="#handleTaiLai"/>
+    </children>
+</AnchorPane>
+

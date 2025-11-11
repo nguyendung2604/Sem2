@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 public class MainApp extends Application {
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("/org/example/healtech/view/LoginView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("/org/example/healtech/view/DashboardHomeView.fxml"));
         Scene scene = new Scene((Parent)fxmlLoader.load());
         stage.setTitle("HealTech Medisoft - Dashboard");
         stage.setScene(scene);

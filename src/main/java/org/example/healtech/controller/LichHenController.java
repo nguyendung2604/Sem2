@@ -111,7 +111,7 @@ public class LichHenController {
         });
 
         // Tải Bác sĩ (Giả sử NhanVienDAO có hàm chỉ lấy bác sĩ)
-        cbBacSi.setItems(FXCollections.observableArrayList(nhanVienDAO.getAllBacSi()));
+        cbBacSi.setItems(FXCollections.observableArrayList(nhanVienDAO.getAll()));
         // Hiển thị tên bác sĩ trong ComboBox
         cbBacSi.setConverter(new StringConverter<NhanVien>() {
             @Override public String toString(NhanVien nhanVien) {

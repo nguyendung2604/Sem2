@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 
 <VBox xmlns:fx="http://javafx.com/fxml" alignment="CENTER" spacing="10">
     <Label text="Quản lý Nhân Viên" style="-fx-font-size: 24; -fx-font-weight: bold;"/>
-    <TableView prefWidth="800" prefHeight="400">
+    <TableView fx:id="nhanVienTableView" prefWidth="800" prefHeight="400">
         <columns>
-            <TableColumn text="Mã BN"/>
-            <TableColumn text="Họ tên"/>
-            <TableColumn text="Ngày sinh"/>
-            <TableColumn text="Giới tính"/>
+            <TableColumn fx:id="colMaNV" text="Mã NV"/>
+            <TableColumn fx:id="colHoTen" text="Họ tên"/>
+            <TableColumn fx:id="colChuyenKhoa" text="Chuyên khoa"/>
+            <TableColumn fx:id="colChucVu" text="Chức vụ"/>
+            <TableColumn fx:id="colSoDienThoai" text="Số điện thoại"/>
+            <TableColumn fx:id="colEmail" text="Email"/>
         </columns>
     </TableView>
 </VBox>

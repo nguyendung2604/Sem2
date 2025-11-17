@@ -19,6 +19,10 @@ public class NhanVienDAO {
              PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 
+            System.out.println("Connected: OK");
+            System.out.println("SQL running: SELECT * FROM NhanVien");
+
+
             while (rs.next()) {
                 NhanVien nv = new NhanVien(
                         rs.getInt("MaNhanVien"),
@@ -132,5 +136,6 @@ public class NhanVienDAO {
             e.printStackTrace();
         }
         return list;
+
     }
 }

@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
  * chúng ta muốn HIỂN THỊ lên TableView sau khi đã JOIN.
  */
 public class LichHenDisplay {
+    
     private int maLichHen;
     private LocalDateTime thoiGianHen;
     private String lyDoKham;

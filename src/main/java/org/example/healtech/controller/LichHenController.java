@@ -17,6 +17,7 @@ import org.example.healtech.model.NhanVien; // <<< BẠN SẼ CẦN TẠO MODEL 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
@@ -57,8 +58,7 @@ public class LichHenController {
     @FXML
     private Button btnThem, btnCapNhat, btnXoa, btnTaiLai;
 
-    // === 3. THAY ĐỔI Kiến trúc DAO ===
-    // Bỏ 'static', tạo đối tượng DAO
+
     private LichHenDAO lichHenDAO;
     private BenhNhanDAO benhNhanDAO;
     private NhanVienDAO nhanVienDAO;
@@ -93,7 +93,23 @@ public class LichHenController {
         colMaLichHen.setCellValueFactory(new PropertyValueFactory<>("maLichHen"));
         colTenBenhNhan.setCellValueFactory(new PropertyValueFactory<>("tenBenhNhan"));
         colTenBacSi.setCellValueFactory(new PropertyValueFactory<>("tenBacSi"));
+
+        // ✅ Format cột Thời Gian Hẹn
         colThoiGianHen.setCellValueFactory(new PropertyValueFactory<>("thoiGianHen"));
+        colThoiGianHen.setCellFactory(column -> new TableCell<LichHenDisplay, LocalDateTime>() {
+            private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+            @Override
+            protected void updateItem(LocalDateTime item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(formatter.format(item));
+                }
+            }
+        });
+
         colLyDoKham.setCellValueFactory(new PropertyValueFactory<>("lyDoKham"));
         colTrangThai.setCellValueFactory(new PropertyValueFactory<>("trangThai"));
     }
@@ -138,11 +154,11 @@ public class LichHenController {
             boolean success = lichHenDAO.addLichHen(lichHen);
 
             if (success) {
-                showAlert("✅ Thêm lịch hẹn thành công!", Alert.AlertType.INFORMATION);
+                showAlert(" Thêm lịch hẹn thành công!", Alert.AlertType.INFORMATION);
                 loadLichHenTable();
                 clearForm();
             } else {
-                showAlert("❌ Không thể thêm lịch hẹn!", Alert.AlertType.ERROR);
+                showAlert(" Không thể thêm lịch hẹn!", Alert.AlertType.ERROR);
             }
         }
         // Lỗi (như validate) đã được hiển thị bên trong hàm getLichHenFromForm
@@ -152,7 +168,7 @@ public class LichHenController {
     private void handleCapNhat(ActionEvent event) {
         LichHenDisplay selected = tableLichHen.getSelectionModel().getSelectedItem();
         if (selected == null) {
-            showAlert("⚠️ Vui lòng chọn lịch hẹn cần cập nhật!", Alert.AlertType.WARNING);
+            showAlert(" Vui lòng chọn lịch hẹn cần cập nhật!", Alert.AlertType.WARNING);
             return;
         }
 
@@ -167,10 +183,10 @@ public class LichHenController {
             boolean success = lichHenDAO.updateLichHen(lichHenMoi);
 
             if (success) {
-                showAlert("✅ Cập nhật lịch hẹn thành công!", Alert.AlertType.INFORMATION);
+                showAlert(" Cập nhật lịch hẹn thành công!", Alert.AlertType.INFORMATION);
                 loadLichHenTable();
             } else {
-                showAlert("❌ Không thể cập nhật lịch hẹn!", Alert.AlertType.ERROR);
+                showAlert(" Không thể cập nhật lịch hẹn!", Alert.AlertType.ERROR);
             }
         }
     }
@@ -186,7 +202,7 @@ public class LichHenController {
             String trangThai = cbTrangThai.getValue();
 
             if (benhNhan == null || bacSi == null || ngayHen == null || lyDo.isEmpty() || trangThai == null) {
-                showAlert("⚠️ Vui lòng nhập đầy đủ thông tin!", Alert.AlertType.WARNING);
+                showAlert(" Vui lòng nhập đầy đủ thông tin!", Alert.AlertType.WARNING);
                 return Optional.empty();
             }
 
@@ -203,11 +219,11 @@ public class LichHenController {
             return Optional.of(lichHen);
 
         } catch (DateTimeParseException e) {
-            showAlert("⚠️ Lỗi định dạng giờ hẹn! Phải là HH:mm (ví dụ: 14:30)", Alert.AlertType.ERROR);
+            showAlert(" Lỗi định dạng giờ hẹn! Phải là HH:mm (ví dụ: 14:30)", Alert.AlertType.ERROR);
             return Optional.empty();
         } catch (Exception e) {
             e.printStackTrace();
-            showAlert("⚠️ Lỗi khi lấy dữ liệu: " + e.getMessage(), Alert.AlertType.ERROR);
+            showAlert(" Lỗi khi lấy dữ liệu: " + e.getMessage(), Alert.AlertType.ERROR);
             return Optional.empty();
         }
     }
@@ -216,7 +232,7 @@ public class LichHenController {
     private void handleXoa(ActionEvent event) {
         LichHenDisplay selected = tableLichHen.getSelectionModel().getSelectedItem(); // <<< THAY ĐỔI
         if (selected == null) {
-            showAlert("⚠️ Vui lòng chọn lịch hẹn cần xóa!", Alert.AlertType.WARNING);
+            showAlert(" Vui lòng chọn lịch hẹn cần xóa!", Alert.AlertType.WARNING);
             return;
         }
 
@@ -227,10 +243,10 @@ public class LichHenController {
             // <<< THAY ĐỔI: Gọi hàm deleteLichHen (không static)
             boolean success = lichHenDAO.deleteLichHen(selected.getMaLichHen());
             if (success) {
-                showAlert("✅ Xóa lịch hẹn thành công!", Alert.AlertType.INFORMATION);
+                showAlert(" Xóa lịch hẹn thành công!", Alert.AlertType.INFORMATION);
                 loadLichHenTable();
             } else {
-                showAlert("❌ Không thể xóa lịch hẹn!", Alert.AlertType.ERROR);
+                showAlert(" Không thể xóa lịch hẹn!", Alert.AlertType.ERROR);
             }
         }
     }

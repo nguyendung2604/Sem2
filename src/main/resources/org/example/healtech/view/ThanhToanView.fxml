@@ -1,16 +1,146 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" alignment="CENTER" spacing="10">
-    <Label text="Thanh Toán" style="-fx-font-size: 24; -fx-font-weight: bold;"/>
-    <TableView prefWidth="800" prefHeight="400">
-        <columns>
-            <TableColumn text="Mã BN"/>
-            <TableColumn text="Họ tên"/>
-            <TableColumn text="Ngày sinh"/>
-            <TableColumn text="Giới tính"/>
-        </columns>
-    </TableView>
-</VBox>
+<AnchorPane fx:id="mainAnchorPane" prefHeight="700.0" prefWidth="900.0"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.healtech.controller.ThanhToanController">
+    <children>
+        <VBox layoutX="14.0" layoutY="14.0" prefHeight="780.0" prefWidth="872.0" spacing="5.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" VBox.vgrow="NEVER">
+            <children>
+                <Label text="LẬP HÓA ĐƠN THANH TOÁN" textFill="#007bff">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="10.0" />
+                    </VBox.margin>
+                </Label>
+                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                    <children>
+                        <Label text="Mã Phiếu Khám:" />
+                        <TextField fx:id="txtMaPhieuKham" promptText="Nhập mã phiếu khám" />
+                        <Button mnemonicParsing="false" onAction="#handleTinhTien" text="Tính Tiền" style="-fx-background-color: #28a745; -fx-text-fill: white;" />
+                        <Label fx:id="lblTenBenhNhan" text="[Tên Bệnh Nhân]" textFill="#007bff">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="10.0" />
+                    </VBox.margin>
+                </HBox>
+
+                <Label text="CHI TIẾT THUỐC ĐÃ KÊ" style="-fx-font-weight: bold;">
+                    <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                    </VBox.margin>
+                </Label>
+                <TableView fx:id="chiTietThuocTable" prefHeight="200.0" prefWidth="872.0" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colTenThuoc" prefWidth="250.0" text="Tên Thuốc" />
+                        <TableColumn fx:id="colDonVi" prefWidth="100.0" text="Đơn Vị" />
+                        <TableColumn fx:id="colSoLuong" prefWidth="100.0" text="Số Lượng" />
+                        <TableColumn fx:id="colGiaBan" prefWidth="150.0" text="Giá Bán (VND)" />
+                        <TableColumn fx:id="colThanhTien" prefWidth="150.0" text="Thành Tiền (VND)" />
+                    </columns>
+                </TableView>
+
+                <Label text="CHI TIẾT DỊCH VỤ ĐÃ THỰC HIỆN" style="-fx-font-weight: bold;">
+                    <VBox.margin>
+                        <Insets bottom="5.0" top="10.0" />
+                    </VBox.margin>
+                </Label>
+                <TableView fx:id="chiTietDichVuTable" prefHeight="150.0" prefWidth="872.0" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colTenDichVu" prefWidth="600.0" text="Tên Dịch Vụ" />
+                        <TableColumn fx:id="colPhiDichVu" prefWidth="150.0" text="Phí (VND)" />
+                    </columns>
+                </TableView>
+                <Separator prefWidth="200.0">
+                    <VBox.margin>
+                        <Insets top="15.0" bottom="15.0" />
+                    </VBox.margin>
+                </Separator>
+
+                <VBox alignment="CENTER_RIGHT" prefWidth="872.0" spacing="8.0">
+                    <children>
+                        <HBox alignment="CENTER_RIGHT" spacing="20.0">
+                            <children>
+                                <Label text="Tổng Tiền Thuốc:" />
+                                <Label fx:id="lblTongTienThuoc" text="0 VND" prefWidth="150.0" alignment="CENTER_RIGHT" style="-fx-font-weight: bold;"/>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" spacing="20.0">
+                            <children>
+                                <Label text="Tổng Tiền Dịch Vụ:" />
+                                <Label fx:id="lblTongTienDichVu" text="0 VND" prefWidth="150.0" alignment="CENTER_RIGHT" style="-fx-font-weight: bold;"/>
+                            </children>
+                        </HBox>
+
+                        <Separator prefWidth="200.0" />
+                        <HBox alignment="CENTER_RIGHT" spacing="20.0">
+                            <children>
+                                <Label text="TỔNG CỘNG (PHẢI THANH TOÁN):">
+                                    <font>
+                                        <Font name="System Bold" size="16.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="lblTongCong" text="0 VND" prefWidth="150.0" alignment="CENTER_RIGHT" textFill="#dc3545">
+                                    <font>
+                                        <Font name="System Bold" size="18.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+                <VBox alignment="CENTER_RIGHT" prefWidth="872.0" spacing="10.0">
+                    <children>
+                        <Label text="Hình thức thanh toán:" style="-fx-font-weight: bold;" />
+                        <fx:define>
+                            <ToggleGroup fx:id="paymentMethodGroup" />
+                        </fx:define>
+                        <HBox alignment="CENTER_RIGHT" spacing="15.0">
+                            <children>
+                                <RadioButton fx:id="radioTienMat" text="Tiền mặt" toggleGroup="$paymentMethodGroup" selected="true" />
+                                <RadioButton fx:id="radioThe" text="Thẻ (Credit/Debit)" toggleGroup="$paymentMethodGroup" />
+                                <RadioButton fx:id="radioChuyenKhoan" text="Chuyển khoản" toggleGroup="$paymentMethodGroup" />
+                            </children>
+                        </HBox>
+                        <HBox fx:id="tienMatBox" alignment="CENTER_RIGHT" spacing="10.0" managed="false" visible="false">
+                            <children>
+                                <Label text="Tiền khách đưa:" />
+                                <TextField fx:id="txtTienKhachDua" prefWidth="120.0" promptText="0" />
+                                <Label text="Tiền thối lại:" />
+                                <Label fx:id="lblTienThoiLai" style="-fx-font-weight: bold; -fx-text-fill: blue;" text="0 VND" minWidth="100.0" />
+                            </children>
+                        </HBox>
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                    </VBox.margin>
+                </VBox>
+
+                <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="872.0" spacing="10.0">
+                    <children>
+                        <Button fx:id="btnXacNhanThanhToan" mnemonicParsing="false" onAction="#handleXacNhanThanhToan" text="XÁC NHẬN THANH TOÁN" prefHeight="40.0" prefWidth="250.0" style="-fx-background-color: #007bff; -fx-text-fill: white; -fx-font-weight: bold;" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

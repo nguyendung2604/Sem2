@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.example.healtech.controller.LichHenController">
+            fx:controller="org.example.healtech.controller.LichHenController"  stylesheets="@../css/style.css">
     <center>
         <TableView fx:id="tableLichHen" BorderPane.alignment="CENTER">
             <columns>
@@ -71,10 +71,10 @@
                     </GridPane>
 
                     <HBox spacing="10.0" alignment="CENTER">
-                        <Button fx:id="btnThem" text="Thêm" onAction="#handleThem" prefWidth="70.0" />
-                        <Button fx:id="btnCapNhat" text="Sửa" onAction="#handleCapNhat" prefWidth="70.0" />
-                        <Button fx:id="btnXoa" text="Xóa" onAction="#handleXoa" prefWidth="70.0" />
-                        <Button fx:id="btnTaiLai" text="Tải lại" onAction="#handleTaiLai" prefWidth="70.0" />
+                        <Button fx:id="btnThem" text="Thêm" onAction="#handleThem" prefWidth="70.0" styleClass="add-button" />
+                        <Button fx:id="btnCapNhat" text="Sửa" onAction="#handleCapNhat" prefWidth="70.0" styleClass="edit-button" />
+                        <Button fx:id="btnXoa" text="Xóa" onAction="#handleXoa" prefWidth="70.0" styleClass="delete-button" />
+                        <Button fx:id="btnTaiLai" text="Tải lại" onAction="#handleTaiLai" prefWidth="70.0" styleClass="reload-button" />
                     </HBox>
                 </VBox>
             </content>

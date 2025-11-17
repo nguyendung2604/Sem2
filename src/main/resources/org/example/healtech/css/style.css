@@ -1,9 +1,12 @@
-/* Toàn trang */
+/* === CÀI ĐẶT CHUNG (GLOBAL) === */
 .root {
-    -fx-font-family: "Segoe UI", "Arial";
+    /* Tôi đã gộp 2 định nghĩa .root của bạn lại */
+    -fx-font-family: "System", "Segoe UI", "Arial"; /* Dùng font System làm ưu tiên */
+    -fx-font-size: 13px;
+    -fx-background-color: #F9FAFB; /* Lấy màu nền từ .main-content của bạn */
 }
 
-/* --- SIDEBAR --- */
+/* === LAYOUT CHÍNH (SIDEBAR & MAIN) === */
 .sidebar {
     -fx-background-color: #1E56A0;
     -fx-padding: 20;
@@ -22,7 +25,7 @@
     -fx-background-color: transparent;
     -fx-text-fill: white;
     -fx-font-size: 14px;
-     -fx-font-weight: bold;
+    -fx-font-weight: bold;
     -fx-alignment: CENTER_LEFT;
     -fx-padding: 10 20 10 10;
     -fx-background-radius: 8;
@@ -33,13 +36,151 @@
     -fx-background-color: #163E73;
 }
 
-/* --- PHẦN TRUNG TÂM --- */
 .main-content {
-    -fx-background-color: #F9FAFB;
+    /* Đã chuyển -fx-background-color lên .root */
     -fx-alignment: CENTER;
 }
 
 .main-text {
     -fx-text-fill: #777;
     -fx-font-size: 18px;
+}
+
+
+/* === FORM NHẬP LIỆU (BÊN PHẢI CÁC VIEW CRUD) === */
+/* Áp dụng cho TitledPane bên phải của các màn hình (Lịch Hẹn, Bệnh Nhân...) */
+.titled-pane {
+    -fx-text-fill: #333333;
+}
+
+.titled-pane > .title {
+    -fx-background-color: #007BFF;
+    -fx-background-radius: 5 5 0 0;
+    -fx-padding: 10 15 10 15;
+}
+
+.titled-pane > .title > .text {
+    -fx-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.titled-pane > .content {
+    -fx-background-color: white;
+    -fx-border-color: #DDE2E6;
+    -fx-border-width: 0 1 1 1;
+    -fx-background-radius: 0 0 5 5;
+}
+
+/* Chỉ áp dụng cho Label BÊN TRONG TitledPane (form) */
+.titled-pane .label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-padding: 5 0 0 0;
+}
+
+/* Chỉ áp dụng cho các trường nhập liệu BÊN TRONG TitledPane */
+.titled-pane .text-field,
+.titled-pane .combo-box,
+.titled-pane .date-picker {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #BDBDBD;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-padding: 5 8;
+    -fx-font-size: 14px;
+}
+
+.titled-pane .text-field:focused,
+.titled-pane .combo-box:focused,
+.titled-pane .date-picker:focused {
+    -fx-border-color: #007BFF;
+    -fx-border-width: 1.5;
+    -fx-background-insets: 0;
+}
+
+.titled-pane .combo-box .arrow,
+.titled-pane .date-picker .arrow {
+    -fx-background-color: #007BFF;
+}
+
+/* Chỉ áp dụng cho Button BÊN TRONG TitledPane */
+.titled-pane .button {
+    -fx-background-radius: 4;
+    -fx-font-weight: bold;
+    -fx-padding: 8 15;
+    -fx-cursor: hand;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 3, 0, 0, 2);
+}
+
+.titled-pane .button:hover {
+    -fx-opacity: 0.9;
+}
+
+.titled-pane .add-button {
+    -fx-background-color: #28A745;
+}
+.titled-pane .edit-button {
+    -fx-background-color: #FD7E14;
+}
+.titled-pane .delete-button {
+    -fx-background-color: #DC3545;
+}
+.titled-pane .reload-button {
+    -fx-background-color: #17A2B8;
+}
+
+
+/* === BẢNG (TABLE VIEW) === */
+/* Style này có thể để global vì TableView thường nhất quán */
+.table-view {
+    -fx-border-color: #DDE2E6;
+    -fx-background-color: white;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #F4F7F6;
+    -fx-border-color: #DDE2E6;
+    -fx-border-width: 0 0 2 0;
+}
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-padding: 12 8;
+}
+
+/* GHI ĐÈ: Tắt style bold cho label trong header của bảng */
+.table-view .column-header .label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-padding: 0; /* Ghi đè padding từ .titled-pane .label */
+}
+
+.table-row-cell {
+    -fx-padding: 10 8;
+    -fx-font-size: 14px;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 0 0 1 0;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #FAFAFA;
+}
+.table-row-cell:empty {
+    -fx-background-color: white;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #E3F2FD;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #007BFF;
+    -fx-text-fill: white;
+}
+.table-row-cell:selected .table-cell {
+    -fx-text-fill: white;
 }

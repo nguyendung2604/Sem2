@@ -1,8 +1,8 @@
 package org.example.healtech.dao;
 
 import org.example.healtech.model.LichHen;
-import org.example.healtech.model.LichHenDisplay; // <- (Bạn cần tạo file này như tôi đã gửi trước đó)
-import org.example.healtech.util.DBConnection; // <- (Giả sử file util của bạn tên là DBConnection)
+import org.example.healtech.model.LichHenDisplay;
+import org.example.healtech.util.DBConnection;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -11,13 +11,7 @@ import java.util.List;
 
 public class LichHenDAO {
 
-    // Bỏ 'static' và dùng một biến connection cho đối tượng
-    private Connection conn;
 
-    // Constructor để khởi tạo connection
-    public LichHenDAO() {
-            this.conn = DBConnection.getConnection();
-    }
 
     /**
      * PHƯƠNG THỨC QUAN TRỌNG NHẤT
@@ -25,7 +19,6 @@ public class LichHenDAO {
      */
     public List<LichHenDisplay> getLichHenForView() {
         List<LichHenDisplay> list = new ArrayList<>();
-        // Câu lệnh JOIN
         String query = "SELECT lh.MaLichHen, lh.ThoiGianHen, lh.LyDoKham, lh.TrangThai, " +
                 "bn.HoTen AS TenBenhNhan, nv.HoTen AS TenBacSi " +
                 "FROM LichHen lh " +
@@ -33,8 +26,9 @@ public class LichHenDAO {
                 "LEFT JOIN NhanVien nv ON lh.MaBacSi = nv.MaNhanVien " +
                 "ORDER BY lh.ThoiGianHen DESC";
 
-        // Không dùng try-with-resources cho 'conn' ở đây
-        try (Statement stmt = conn.createStatement();
+        // ✅ LẤY CONNECTION TRONG try-with-resources
+        try (Connection conn = DBConnection.getConnection();
+             Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
 
             while (rs.next()) {
@@ -55,11 +49,14 @@ public class LichHenDAO {
         return list;
     }
 
-    // Thêm mới lịch hẹn (dùng model LichHen cơ bản)
+    // Thêm mới lịch hẹn
     public boolean addLichHen(LichHen lichHen) {
         String query = "INSERT INTO LichHen (MaBenhNhan, MaBacSi, ThoiGianHen, LyDoKham, TrangThai) VALUES (?, ?, ?, ?, ?)";
 
-        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+        // ✅ LẤY CONNECTION TRONG try-with-resources
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
             pstmt.setInt(1, lichHen.getMaBenhNhan());
             pstmt.setInt(2, lichHen.getMaBacSi());
             pstmt.setTimestamp(3, Timestamp.valueOf(lichHen.getThoiGianHen()));
@@ -75,18 +72,21 @@ public class LichHenDAO {
     }
 
     /**
-     * Phương thức update đầy đủ (Thay thế cho updateTrangThai)
+     * Phương thức update đầy đủ
      */
     public boolean updateLichHen(LichHen lichHen) {
         String query = "UPDATE LichHen SET MaBenhNhan = ?, MaBacSi = ?, ThoiGianHen = ?, LyDoKham = ?, TrangThai = ? WHERE MaLichHen = ?";
 
-        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+        // ✅ LẤY CONNECTION TRONG try-with-resources
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
             pstmt.setInt(1, lichHen.getMaBenhNhan());
             pstmt.setInt(2, lichHen.getMaBacSi());
             pstmt.setTimestamp(3, Timestamp.valueOf(lichHen.getThoiGianHen()));
             pstmt.setString(4, lichHen.getLyDoKham());
             pstmt.setString(5, lichHen.getTrangThai());
-            pstmt.setInt(6, lichHen.getMaLichHen()); // MaLichHen ở cuối cho mệnh đề WHERE
+            pstmt.setInt(6, lichHen.getMaLichHen());
 
             return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -100,7 +100,10 @@ public class LichHenDAO {
     public boolean deleteLichHen(int maLichHen) {
         String query = "DELETE FROM LichHen WHERE MaLichHen = ?";
 
-        try (PreparedStatement pstmt = conn.prepareStatement(query)) {
+        // ✅ LẤY CONNECTION TRONG try-with-resources
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
             pstmt.setInt(1, maLichHen);
             return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {

@@ -10,14 +10,13 @@ public class BenhNhan {
     private String diaChi;
     private String soDienThoai;
     private String tienSuBenh;
+    private LocalDate ngayTao;
 
-    // Constructor rỗng
-    public BenhNhan() {
-    }
+    // ===== Constructors =====
+    public BenhNhan() {}
 
-    // Constructor đầy đủ (dùng khi đọc từ DB)
-    public BenhNhan(int maBenhNhan, String hoTen, LocalDate ngaySinh, String gioiTinh, String diaChi, String soDienThoai, String tienSuBenh) {
-        this.maBenhNhan = maBenhNhan;
+    public BenhNhan(String hoTen, LocalDate ngaySinh, String gioiTinh,
+                    String diaChi, String soDienThoai, String tienSuBenh) {
         this.hoTen = hoTen;
         this.ngaySinh = ngaySinh;
         this.gioiTinh = gioiTinh;
@@ -26,35 +25,45 @@ public class BenhNhan {
         this.tienSuBenh = tienSuBenh;
     }
 
-    // --- Getters and Setters ---
-    // (Bạn sẽ cần tất cả)
-
-    public int getMaBenhNhan() {
-        return maBenhNhan;
-    }
-
-    public void setMaBenhNhan(int maBenhNhan) {
+    public BenhNhan(int maBenhNhan, String hoTen, LocalDate ngaySinh, String gioiTinh,
+                    String diaChi, String soDienThoai, String tienSuBenh, LocalDate ngayTao) {
         this.maBenhNhan = maBenhNhan;
-    }
-
-    public String getHoTen() {
-        return hoTen;
-    }
-
-    public void setHoTen(String hoTen) {
         this.hoTen = hoTen;
-    }
-
-    public LocalDate getNgaySinh() {
-        return ngaySinh;
-    }
-
-    public void setNgaySinh(LocalDate ngaySinh) {
         this.ngaySinh = ngaySinh;
+        this.gioiTinh = gioiTinh;
+        this.diaChi = diaChi;
+        this.soDienThoai = soDienThoai;
+        this.tienSuBenh = tienSuBenh;
+        this.ngayTao = ngayTao;
     }
 
-    // ... (Thêm các Getters/Setters còn lại cho GioiTinh, DiaChi, v.v...)
+    // ===== Getters & Setters =====
+    public int getMaBenhNhan() { return maBenhNhan; }
+    public void setMaBenhNhan(int maBenhNhan) { this.maBenhNhan = maBenhNhan; }
 
-    // QUAN TRỌNG: ComboBox trong Controller đã được
-    // cấu hình để gọi getHoTen(), không phải toString()
+    public String getHoTen() { return hoTen; }
+    public void setHoTen(String hoTen) { this.hoTen = hoTen; }
+
+    public LocalDate getNgaySinh() { return ngaySinh; }
+    public void setNgaySinh(LocalDate ngaySinh) { this.ngaySinh = ngaySinh; }
+
+    public String getGioiTinh() { return gioiTinh; }
+    public void setGioiTinh(String gioiTinh) { this.gioiTinh = gioiTinh; }
+
+    public String getDiaChi() { return diaChi; }
+    public void setDiaChi(String diaChi) { this.diaChi = diaChi; }
+
+    public String getSoDienThoai() { return soDienThoai; }
+    public void setSoDienThoai(String soDienThoai) { this.soDienThoai = soDienThoai; }
+
+    public String getTienSuBenh() { return tienSuBenh; }
+    public void setTienSuBenh(String tienSuBenh) { this.tienSuBenh = tienSuBenh; }
+
+    public LocalDate getNgayTao() { return ngayTao; }
+    public void setNgayTao(LocalDate ngayTao) { this.ngayTao = ngayTao; }
+
+    @Override
+    public String toString() {
+        return hoTen + " - " + soDienThoai;
+    }
 }

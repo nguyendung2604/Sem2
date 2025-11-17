@@ -1,16 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" alignment="CENTER" spacing="10">
-    <Label text="Quản lý Thuốc" style="-fx-font-size: 24; -fx-font-weight: bold;"/>
-    <TableView prefWidth="800" prefHeight="400">
+<VBox spacing="20" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.healtech.controller.ThuocController">
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+    <Label text="QUẢN LÝ THUỐC" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+    <!-- Search Section -->
+    <HBox spacing="10">
+        <TextField fx:id="txtTimKiem" promptText="Nhập tên hoặc mã thuốc..." HBox.hgrow="ALWAYS"/>
+        <Button text="Tìm kiếm" onAction="#handleTimKiem" style="-fx-background-color: #2196F3; -fx-text-fill: white;"/>
+        <Button text="🔄 Tải lại" onAction="#handleTaiLai"/>
+    </HBox>
+
+    <!-- Table View - CHỈ GIỮ LẠI CÁC CỘT CÓ TRONG CONTROLLER -->
+    <TableView fx:id="tableThuoc" VBox.vgrow="ALWAYS">
         <columns>
-            <TableColumn text="Mã BN"/>
-            <TableColumn text="Họ tên"/>
-            <TableColumn text="Ngày sinh"/>
-            <TableColumn text="Giới tính"/>
+            <TableColumn text="Mã thuốc" prefWidth="80" fx:id="colMaThuoc"/>
+            <TableColumn text="Tên thuốc" prefWidth="200" fx:id="colTenThuoc"/>
+            <TableColumn text="Đơn vị" prefWidth="80" fx:id="colDonViTinh"/>
+            <TableColumn text="Số lượng" prefWidth="80" fx:id="colSoLuongTon"/>
+            <TableColumn text="Giá bán" prefWidth="100" fx:id="colGiaBan"/>
+            <!-- LOẠI BỎ colNgayTao VÌ NÓ GÂY LỖI -->
         </columns>
     </TableView>
+
+    <!-- Form Section -->
+    <VBox spacing="15">
+        <Label text="THÔNG TIN THUỐC" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+        <HBox spacing="20">
+            <VBox spacing="10" prefWidth="300">
+                <Label text="Tên thuốc *"/>
+                <TextField fx:id="txtTenThuoc" prefWidth="280"/>
+
+                <Label text="Đơn vị tính *"/>
+                <ComboBox fx:id="cbDonViTinh" prefWidth="280"/>
+            </VBox>
+
+            <VBox spacing="10" prefWidth="300">
+                <Label text="Số lượng tồn *"/>
+                <TextField fx:id="txtSoLuongTon" prefWidth="280"/>
+
+                <Label text="Giá bán (VND) *"/>
+                <TextField fx:id="txtGiaBan" prefWidth="280"/>
+            </VBox>
+        </HBox>
+    </VBox>
+
+    <!-- Button Section -->
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Thêm" onAction="#handleThem" style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+        <Button text="Cập nhật" onAction="#handleCapNhat" style="-fx-background-color: #2196F3; -fx-text-fill: white;"/>
+        <Button text="Xóa" onAction="#handleXoa" style="-fx-background-color: #f44336; -fx-text-fill: white;"/>
+        <Button text="Làm mới" onAction="#clearForm"/>
+    </HBox>
 </VBox>
